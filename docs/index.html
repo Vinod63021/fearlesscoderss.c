@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f3f3f3;
+        }
+
+        .chat-container {
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .chat-box {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .chat-input {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .user, .bot {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .user {
+            background-color: #007bff;
+            color: #fff;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background-color: #f0f0f0;
+            color: #333;
+            align-self: flex-start;
+        }
+    </style>
+    <title>C Programming Chatbot</title>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">C Programming Chatbot by fearless coders</div>
+        <div class="chat-box" id="chatBox"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your question...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+
+            // Get user input
+            const userMessage = userInput.value;
+
+            // Display user message
+            displayMessage('user', userMessage);
+
+            // Clear input
+            userInput.value = '';
+
+            // Call function to handle bot response
+            handleBotResponse(userMessage);
+        }
+
+        function handleBotResponse(userMessage) {
+            // Simple bot logic to respond to basic C programming questions
+            let botMessage = '';
+
+            if (userMessage.includes('hello') || userMessage.includes('hi')) {
+                botMessage = 'Hello! How can I help you with C programming today?';
+            } else if (userMessage.includes('C programming')) {
+                botMessage = 'C is a powerful programming language commonly used for system programming and embedded systems.';
+            } else if (userMessage.includes('variables')) {
+                botMessage = 'In C, variables are used to store data. They must be declared with a data type before use.';
+            } else if (userMessage.includes('functions')) {
+                botMessage = 'Functions in C allow you to group code into modular and reusable blocks. You can declare functions before or after the main function.';
+            } else if (userMessage.includes('loops')) {
+                botMessage = 'C supports various types of loops, such as for, while, and do-while loops. Loops are used to repeat a block of code multiple times.';
+            } else if (userMessage.includes('pointers')) {
+                botMessage = 'Pointers in C store the memory address of a variable. They are powerful but require careful use. You can perform operations like dereferencing and pointer arithmetic.';
+            } else if (userMessage.includes('arrays')) {
+                botMessage = 'Arrays in C allow you to store multiple values of the same data type in a contiguous memory location. Array indices start from 0.';
+            } else if (userMessage.includes('structures')) {
+                botMessage = 'Structures in C let you group different types of data under a single name. They are used for creating more complex data structures.';
+            } else {
+                botMessage = "I'm sorry, I didn't understand that. Please ask a different question.";
+            }
+
+            // Display bot message
+            displayMessage('bot', botMessage);
+        }
+
+        function displayMessage(sender, message) {
+            const chatBox = document.getElementById('chatBox');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add(sender);
+            messageElement.innerText = message;
+            chatBox.appendChild(messageElement);
+        }
+    </script>
+</body>
+</html>
